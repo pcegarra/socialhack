@@ -40,8 +40,8 @@ class _SwipePageState extends State<SwipePage> {
                         Container(
                           child: ClipRRect(
                             borderRadius: BorderRadius.only(topLeft: Radius.circular(16), topRight:Radius.circular(16)),
-                            child: Image.asset(
-                              "assets/test.jpg",
+                            child: Image.network(
+                              requests[index].image,
                               fit: BoxFit.cover,
                             ),
                           ),

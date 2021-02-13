@@ -25,6 +25,8 @@ dependencies:
     sdk: flutter
   flutter_swiper: ^1.1.6
   flutter_tags: ^0.4.9+1
+  parse_server_sdk: ^2.0.1
+  provider: 4.3.3
 
 
 dev_dependencies:

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:socialhack/models/request.dart';
-import 'package:socialhack/pages/select_role_page.dart';
-import 'data/data.dart';
+import 'package:socialhack/pages/splash_page.dart';
 
 void main() => runApp(new MyApp());
 
@@ -14,8 +11,7 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new SelectRolePage(),
+      home: new SplashPage(),
     );
   }
 }
-
