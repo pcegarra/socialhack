@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tags/flutter_tags.dart';
 import 'package:socialhack/data/data.dart';
-import 'package:socialhack/main.dart';
-import 'package:socialhack/models/interests.dart';
+import 'package:socialhack/models/interest.dart';
+import 'package:socialhack/pages/home_page.dart';
 
 class SelectRolePage extends StatefulWidget {
   @override
@@ -48,7 +48,7 @@ class _SelectRolePageState extends State<SelectRolePage> {
                   index: index,
                   // required
                   title: interests[index].title,
-                  active: true,
+                  active: false,
                   activeColor: Colors.greenAccent,
                   textActiveColor: Colors.black,
                   color: Colors.white,
@@ -71,9 +71,9 @@ class _SelectRolePageState extends State<SelectRolePage> {
             height: 50,
             child: RaisedButton(
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => SwipePage()),
+                  MaterialPageRoute(builder: (context) => HomePage()),
                 );
               },
               child: Text(

@@ -1,4 +1,4 @@
-import 'package:socialhack/models/interests.dart';
+import 'package:socialhack/models/interest.dart';
 import 'package:socialhack/models/request.dart';
 
 /*
