@@ -99,7 +99,6 @@ class _AuthPageState extends State<AuthPage> {
   Future<void> checkCurrentUser() async {
     ParseUser currentUser = await ParseUser.currentUser();
     if (currentUser != null && currentUser.objectId != null) {
-      print("hay user");
       Provider.of<AppState>(context, listen: false).setCurrentUser(currentUser);
     }
   }

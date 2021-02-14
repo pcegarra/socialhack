@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:socialhack/app_state.dart';
 import 'package:socialhack/pages/auth_page.dart';
 import 'package:socialhack/pages/select_role_page.dart';
 import 'package:socialhack/pages/swiper_page.dart';
@@ -14,8 +12,6 @@ class HomePage extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _HomePageState extends State<HomePage> {
-  AppState appState;
-
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -25,12 +21,6 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _selectedIndex = index;
     });
-  }
-
-  @override
-  void initState() {
-    appState = AppState();
-    super.initState();
   }
 
   @override
@@ -52,11 +42,8 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: ChangeNotifierProvider(
-        create: (_) => appState,
-        child: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
-        ),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tags/flutter_tags.dart';
+import 'package:provider/provider.dart';
+import 'package:socialhack/app_state.dart';
 import 'package:socialhack/data/data.dart';
 import 'package:socialhack/models/interest.dart';
 import 'package:socialhack/pages/home_page.dart';
@@ -26,12 +28,15 @@ class _SelectRolePageState extends State<SelectRolePage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            "Bienvenid@ a Social Finder",
-            style: TextStyle(fontSize: 24),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            child: Text(
+              "Bienvenid@ a Social Finder",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
           ),
           Text(
-            "Es tu primera vez, ¿verdad? A continuación puedes elegir varias temáticas para personalizar tu experiencia y poder mostrarte mejor contenido donde puedas contribuir tu granito o tu camión de arena",
+            "Puedes aportar tu granito o tu 🚚 de arena encontrado oportunidades donde puedas ayudar, y juntos crear una mejor comunidad",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 18),
           ),
@@ -42,13 +47,11 @@ class _SelectRolePageState extends State<SelectRolePage> {
               itemCount: interests.length,
               itemBuilder: (int index) {
                 return ItemTags(
-                  // Each ItemTags must contain a Key. Keys allow Flutter to
-                  // uniquely identify widgets.
                   key: Key(index.toString()),
                   index: index,
                   // required
                   title: interests[index].title,
-                  active: false,
+                  active: context.watch<AppState>().currentCategory == index,
                   activeColor: Colors.greenAccent,
                   textActiveColor: Colors.black,
                   color: Colors.white,
@@ -60,7 +63,12 @@ class _SelectRolePageState extends State<SelectRolePage> {
                     icon: Icons.check,
                   ),
                   // OR null,
-                  onPressed: (item) => print(item),
+                  onPressed: (item) {
+                    if (item.active) {
+                      Provider.of<AppState>(context, listen: false)
+                          .currentCategory = index;
+                    }
+                  },
                   onLongPressed: (item) => print(item),
                 );
               },
