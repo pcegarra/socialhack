@@ -3,7 +3,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:provider/provider.dart';
 import 'package:socialhack/data/data.dart';
 import 'package:socialhack/models/request.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import '../app_state.dart';
 
 class SwipePage extends StatefulWidget {
@@ -131,11 +131,10 @@ class _SwipePageState extends State<SwipePage> {
   }
 
   _launchURL(String url) async {
-    /*if (await canLaunch(url)) {
+    if (await canLaunch(url)) {
       await launch(url);
     } else {
       throw 'Could not launch $url';
     }
-  }*/
   }
 }
