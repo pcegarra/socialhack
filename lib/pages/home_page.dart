@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socialhack/app_state.dart';
 import 'package:socialhack/pages/auth_page.dart';
+import 'package:socialhack/pages/select_role_page.dart';
 import 'package:socialhack/pages/swiper_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,6 +14,8 @@ class HomePage extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _HomePageState extends State<HomePage> {
+  AppState appState;
+
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -25,17 +28,32 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    appState = AppState();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Social Finder'),
         actions: [
-          Padding(
-              padding: EdgeInsets.only(right: 16), child: Icon(Icons.settings))
+          GestureDetector(
+            child: Padding(
+                padding: EdgeInsets.only(right: 16),
+                child: Icon(Icons.settings)),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => SelectRolePage()),
+              );
+            },
+          )
         ],
       ),
       body: ChangeNotifierProvider(
-        create: (_) => AppState(),
+        create: (_) => appState,
         child: Center(
           child: _widgetOptions.elementAt(_selectedIndex),
         ),

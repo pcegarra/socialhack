@@ -12,4 +12,11 @@ class AppState extends ChangeNotifier {
   ParseUser getCurrentUser(){
     return _currentUser;
   }
+
+  bool isOng(){
+    if(_currentUser==null){
+      return false;
+    }
+    return _currentUser.get<bool>("isOng");
+  }
 }

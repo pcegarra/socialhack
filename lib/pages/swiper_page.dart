@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:socialhack/data/data.dart';
 import 'package:socialhack/models/request.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SwipePage extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class _SwipePageState extends State<SwipePage> {
 
   @override
   void initState() {
-    requests = generateData();
+    requests = generateDataAdoptar();
     super.initState();
   }
 
@@ -36,10 +37,13 @@ class _SwipePageState extends State<SwipePage> {
                       ],
                     ),
                     child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           child: ClipRRect(
-                            borderRadius: BorderRadius.only(topLeft: Radius.circular(16), topRight:Radius.circular(16)),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(16),
+                                topRight: Radius.circular(16)),
                             child: Image.network(
                               requests[index].image,
                               fit: BoxFit.cover,
@@ -48,14 +52,43 @@ class _SwipePageState extends State<SwipePage> {
                           width: double.infinity,
                           height: 300,
                         ),
-                        Text(
-                          requests[index].title,
-                          style: TextStyle(fontSize: 24),
+                        Padding(
+                          padding: EdgeInsets.all(16),
+                          child: Text(
+                            requests[index].title,
+                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                          ),
                         ),
-                        Text(
-                          requests[index].content,
-                          style: TextStyle(fontSize: 16),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Text(
+                            requests[index].content,
+                            style: TextStyle(fontSize: 16),
+                          ),
                         ),
+                        Padding(
+                          padding: EdgeInsets.all(20),
+                          child: Text(
+                            "Entidad: "+requests[index].collaborator,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(16),
+                          child: ButtonTheme(
+                            minWidth: MediaQuery.of(context).size.width,
+                            height: 50,
+                            child: RaisedButton(
+                              onPressed: () {
+                                _launchURL(requests[index].url);
+                              },
+                              child: Text(
+                                "Quiero ayudar",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   );
@@ -67,4 +100,13 @@ class _SwipePageState extends State<SwipePage> {
               )
             : Text("Cargando"));
   }
+
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
 }

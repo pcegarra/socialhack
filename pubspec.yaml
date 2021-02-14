@@ -27,6 +27,7 @@ dependencies:
   flutter_tags: ^0.4.9+1
   parse_server_sdk: ^2.0.1
   provider: 4.3.3
+  url_launcher: ^5.7.10
 
 
 dev_dependencies:
@@ -47,6 +48,8 @@ flutter:
 
   assets:
     - assets/test.jpg
+    - assets/login.png
+    - assets/add_content.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
